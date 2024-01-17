@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     if (props.prefix) {
       return (
-        <div>
+        <div className='w-full'>
           <div
             className={cn(
               `transition px-4 h-14 w-full bg-zinc-900 text-zinc-200 rounded-xl focus-within:outline outline-offset-2 outline-2 outline-zinc-100 flex items-center gap-1 ${
@@ -43,7 +43,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     return (
-      <div>
+      <div className='w-full'>
         <input
           type={type}
           className={cn(

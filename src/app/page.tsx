@@ -1,15 +1,15 @@
-import { Input } from '@/components/form/input'
-import Image from 'next/image'
+import { GenerateQrcode } from '@/components/gerar-qrcode'
 
 export default function Home() {
   return (
-    <main className="min-h-screen items-center p-24 grid place-items-center text-center">
-      <div className=''>
-        <h1 className='text-2xl'>QR Code</h1>
-        <form className='mt-4 flex items-center gap-2 max-w-2xl'>
-          <Input type="text" placeholder='Informe o link' className='w-full' />
-          <button className="px-4 h-14 rounded-xl font-bold bg-green-500">Gerar qrcode</button>
-        </form>
+    <main className="min-h-screen p-24 flex justify-center text-center">
+      <div className="max-w-5xl w-full">
+        <h1 className="text-3xl font-semibold">QRCODE</h1>
+        <GenerateQrcode />
+
+        <div className="text-start mt-4">
+          <h2 className="font-semibold">Recentes 0</h2>
+        </div>
       </div>
     </main>
   )

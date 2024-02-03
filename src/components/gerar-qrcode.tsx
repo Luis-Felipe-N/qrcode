@@ -5,8 +5,8 @@ import { Input } from './form/input'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQrCodes } from '@/contexts/QrcodesContext'
-import { url } from 'inspector'
 import { Spinner } from '@phosphor-icons/react'
+import { useRouter } from 'next/navigation'
 
 const generateQrcodeFormSchema = z.object({
   url: z.string(),
@@ -24,13 +24,15 @@ export function GenerateQrcode() {
   })
 
   const { createNewQrcode } = useQrCodes()
+  const router = useRouter()
 
   async function handleGenerateQrcode(data: GenerateQrcodeFormData) {
     const response = await fetch(
-      `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${data.url}`,
+      `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${data.url}`,
     )
 
-    createNewQrcode({ url: response.url })
+    const qrCode = createNewQrcode({ url: response.url })
+    router.push(`qrcode/${qrCode.id}`)
   }
 
   return (

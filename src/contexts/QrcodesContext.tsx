@@ -14,7 +14,7 @@ interface CreateNewQrcode {
 
 interface QrcodesContextType {
   qrcodes: Qrcode[]
-  createNewQrcode: (data: CreateNewQrcode) => void
+  createNewQrcode: (data: CreateNewQrcode) => Qrcode
 }
 
 interface QrcodesProviderProps {
@@ -35,6 +35,8 @@ export function QrcodesContextProvider({ children }: QrcodesProviderProps) {
     }
 
     setQrcodes((value) => [...value, newQrcode])
+
+    return newQrcode
   }
 
   return (

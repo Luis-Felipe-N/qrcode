@@ -31,7 +31,7 @@ export function GenerateQrcode() {
       `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${data.url}`,
     )
 
-    const qrCode = createNewQrcode({ url: response.url })
+    const qrCode = createNewQrcode({ url: data.url, image: response.url })
     router.push(`qrcode/${qrCode.id}`)
   }
 

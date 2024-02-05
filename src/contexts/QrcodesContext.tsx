@@ -1,19 +1,22 @@
 'use client'
 
+import { getFromLocalStorage, saveLocalStorage } from '@/services/storage'
 import { createContext, ReactNode, useContext, useState } from 'react'
 
-interface Qrcode {
+export interface Qrcode {
   id: string
   url: string
+  image: string
   created_at: Date
 }
 
 interface CreateNewQrcode {
+  image: string
   url: string
 }
 
 interface QrcodesContextType {
-  qrcodes: Qrcode[]
+  qrCodes: Qrcode[]
   createNewQrcode: (data: CreateNewQrcode) => Qrcode
 }
 
@@ -24,25 +27,26 @@ interface QrcodesProviderProps {
 export const QrcodesContext = createContext({} as QrcodesContextType)
 
 export function QrcodesContextProvider({ children }: QrcodesProviderProps) {
-  const [qrcodes, setQrcodes] = useState<Qrcode[]>([])
-
   function createNewQrcode(data: CreateNewQrcode) {
     const idNewQrcode = String(new Date().getTime())
     const newQrcode: Qrcode = {
       id: idNewQrcode,
       url: data.url,
+      image: data.image,
       created_at: new Date(),
     }
 
-    setQrcodes((value) => [...value, newQrcode])
+    saveLocalStorage(newQrcode)
 
     return newQrcode
   }
 
+  const qrCodes = getFromLocalStorage()
+
   return (
     <QrcodesContext.Provider
       value={{
-        qrcodes,
+        qrCodes,
         createNewQrcode,
       }}
     >

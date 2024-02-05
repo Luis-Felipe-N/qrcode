@@ -1,7 +1,7 @@
 'use client'
 
-import { useQrCodes } from '@/contexts/QrcodesContext'
-import { ArrowLeft, ArrowRight } from '@phosphor-icons/react'
+import { getFromLocalStorage } from '@/services/storage'
+import { ArrowLeft } from '@phosphor-icons/react'
 import Link from 'next/link'
 
 interface QrcodesProps {
@@ -11,9 +11,9 @@ interface QrcodesProps {
 }
 
 export default function Qrcode({ params }: QrcodesProps) {
-  const { qrcodes } = useQrCodes()
+  const qrCodes = getFromLocalStorage()
 
-  const qrcode = qrcodes.find((item) => item.id === params.id)
+  const qrcode = qrCodes.find((item) => item.id === params.id)
 
   return (
     <main className="min-h-screen p-24 flex justify-center text-center items-center">
@@ -30,7 +30,7 @@ export default function Qrcode({ params }: QrcodesProps) {
         <div className="bg-zinc-950 max-w-2xl p-12 rounded-3xl mt-12">
           <strong className="text-xl">Aponte a camera</strong>
           <div className="bg-white p-2 my-8">
-            <img src={qrcode?.url} alt="" className="w-full" />
+            <img src={qrcode?.image} alt="" className="w-full" />
           </div>
 
           <button className="px-8 h-14 w-full rounded-xl bg-blue-500 hover:bg-blue-600 space-x-2 text-zinc-50 font-semibold">
